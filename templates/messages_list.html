@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="conteiner">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      {% for message in messages %}
+      <div class="card mt-5">
+        <div class="card-header">
+          {{message.service}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{message.user}}</h5>
+          <p class="card-text">{{message.text}}</p>
+          <p class="card-text">{{message.date}}</p>
+          <a href="#" class="btn btn-primary">Благословити</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

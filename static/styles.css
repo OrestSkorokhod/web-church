@@ -1,0 +1,15 @@
+h1 {
+  background-color: red;
+}
+
+.cerkva {
+  background-image: url('/static/cerkva.png');
+  color: green;
+  background-size: cover;
+  height: 550px;
+}
+
+.services {
+  padding-top: 350px;
+
+}
