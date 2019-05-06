@@ -4,29 +4,30 @@
 {% block content %}
 <div class=" col-md-6 offset-md-2">
 
-<script>
+  <script>
     const confirmForm = function() {
-        if(!confirm('Оплатити послугу?'))
-            return false;
+      if(!confirm('Оплатити послугу?'))
+      return false;
     }
-</script>
-<form onsubmit="confirmForm()" class="" action="{% url 'order_service' %}" method="post">
-  {% csrf_token %}
+  </script>
+  <form onsubmit="confirmForm()" class="" action="{% url 'order_service' %}" method="post">
+    {% csrf_token %}
 
-  {% for field in form %}
+    {% for field in form %}
 
-      <div class="form-group m-3">
-        {% if field.errors %}
-          <div class="alert alert-danger">
-            {{ field.errors }}
-          </div>
-        {% endif %}
-        {{ field.label }}
-        {{ field }}
+    <div class="form-group m-3">
+      {% if field.errors %}
+      <div class="alert alert-danger">
+        {{ field.errors }}
       </div>
-  {% endfor %}
+      {% endif %}
+      {{ field.label }}
+      {{ field }}
+    </div>
+    {% endfor %}
 
-  <button type="submit" name="button">Замовити</button>
-</form>
+      <button type="submit" name="button">Замовити</button>
+    
+  </form>
 </div>
 {% endblock %}

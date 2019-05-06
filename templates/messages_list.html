@@ -4,7 +4,14 @@
 <div class="conteiner">
   <div class="row justify-content-md-center">
     <div class="col-6">
-      {% for message in messages %}
+      {% if text %}
+      <div class="alert alert-success mt-5">
+        {{ text }}
+
+      </div>
+
+      {% endif %}
+      {% for message in page.object_list %}
       <div class="card mt-5">
         <div class="card-header">
           {{message.service}}
@@ -13,10 +20,41 @@
           <h5 class="card-title">{{message.user}}</h5>
           <p class="card-text">{{message.text}}</p>
           <p class="card-text">{{message.date}}</p>
-          <a href="#" class="btn btn-primary">Благословити</a>
+          <form class="" action="{% url 'messages' %}" method="post" >
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ message.id }}">
+            <button type="submit" class="btn btn-primary">Благословити</button>
+          </form>
         </div>
       </div>
       {% endfor %}
+
+      {% if is_paginated %}
+      <nav aria-label="..." class="mt-5">
+        <ul class="pagination">
+          <li class="page-item {% if not prev_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+
+
+          {% for n in page.paginator.page_range %}
+          {% if page.number == n %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
+          </li>
+          {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+
+          <li class="page-item {% if not next_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_url }}" tabindex="-1" aria-disabled="true">Next</a>
+          </li>
+        </ul>
+      </nav>
+      {% endif %}
     </div>
 
   </div>

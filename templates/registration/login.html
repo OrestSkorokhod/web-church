@@ -2,36 +2,64 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
+<div class="alert alert-danger">
+  <p>Ви уже ввійшли.</p>
+</div>
+{% else %}
+
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
+<div class="alert alert-danger">
+
+  Ваш логін та пароль не підходять.
+
+  {% endif %}
+
+  {% if next %}
+
+  {% if user.is_authenticated %}
+
+  <div class="alert alert-danger">
+    <p>Ви не маєте доступу до цієї сторінки.</p>
+  </div>
+  {% else %}
+
+  <div class="alert alert-danger">
+    <p>Увійдіть щоб бачити цю сторінку.</p>
+  </div>
+  {% endif %}
+
+  {% endif %}
+</div>
+
+<div class="conteiner">
+  <div class="row justify-content-md-center">
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="form-group">
+          <div class="form-group m-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-group m-3">
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+          </div>
+        </div>
+        <div class="ml-5">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </div>
+    </form>
+
     {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-
-<div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
+  </div>
 </div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</div>
-
-<div>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</div>
-</form>
-
 
 {% endblock %}
