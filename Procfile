@@ -1,1 +1,1 @@
-web: gunicorn cerkva.wsgi --log-file -
+web: gunicorn cerkva.wsgi
