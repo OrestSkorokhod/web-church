@@ -3,6 +3,7 @@ from django.db import models
 class Service(models.Model):
     name = models.CharField(max_length=150, db_index=True)
     price = models.IntegerField()
+    img = models.ImageField(upload_to='static', default='static/ikona.png')
 
     def __repr__(self):
         return self.name

@@ -8,8 +8,8 @@ from religion.forms import MessageForm
 from religion.models import *
 
 def index(request):
-    # services = Service.objects.all()
-    return render(request, 'index.html')
+    services = Service.objects.all()
+    return render(request, 'index.html', context={'services': services})
 
 
 def order_service(request):

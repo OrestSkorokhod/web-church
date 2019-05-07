@@ -8,26 +8,17 @@
 
 
 <div class="cerkva ">
-    <div class="services">
-        <div class="row offset-md-1">
-          <div class="col-2">
-              <a href="{% url 'order_service' %}?service=1"><img src="{% static 'svichka.png' %}" alt="Поставити свічку"></a>
-          </div>
-          <div class="col-2">
-              <a href="{% url 'order_service' %}?service=2"><img src="{% static 'mech.png' %}" alt="Освятити"></a>
-          </div>
-          <div class="col-2">
-              <a href="{% url 'order_service' %}?service=3"><img src="{% static 'grob.png' %}" alt="Відспівати"></a>
-          </div>
-          <div class="col-2">
-              <a href="{% url 'order_service' %}?service=4"><img src="{% static 'priest.png' %}" alt="Зняти порчу"></a>
-          </div>
-          <div class="col-2">
-              <a href="{% url 'order_service' %}?service=5"><img src="{% static 'ikona.png' %}" alt="Замолити гріхи"></a>
-          </div>
+  <div class="services">
+    <div class="row offset-md-1">
+      {% for service in services %}
 
-        </div>
+      <div class="col col-md-3">
+        <a href="{% url 'order_service' %}?service={{ service.id }}"><img src="{{ service.img.url }}" alt="{{ service.name }}"><br>{{ service.name }}</a>
+      </div>
+
+      {% endfor %}
     </div>
+  </div>
 
 </div>
 {% endblock %}
