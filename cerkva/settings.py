@@ -26,8 +26,8 @@ SECRET_KEY = 'd*5ab+&vfwgd5unsex!d0f!1ho^2)ts7f_i!87d%u#8f1vk=nk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['orest-web-church.herokuapp.com']
-
+ALLOWED_HOSTS = ['orest-web-church.herokuapp.com', '127.0.0.1']
+# 'orest-web-church.herokuapp.com'
 
 # Application definition
 
@@ -130,6 +130,6 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, 'static'),
 ]
 LOGIN_REDIRECT_URL = '/messages'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # django_heroku.settings(locals())
